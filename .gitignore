@@ -1,0 +1,108 @@
+# ==============================================================================
+# Git Ignore Configuration: 3D Medical Volume Reconstruction Diffusion
+# ==============================================================================
+
+# --- Python & Bytecode ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Environments ---
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+torch_env/
+
+# --- Testing & Profiling ---
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# --- Jupyter & Notebooks ---
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# --- Datasets (Heavy Medical Volumes) ---
+BraTS2020_training_data/
+BraTS20_training_data/
+data/
+*.h5
+*.hdf5
+*.nii
+*.nii.gz
+
+# --- Model Checkpoints & Training Runs ---
+experiments/checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.bin
+
+# --- TensorBoard & Logging ---
+experiments/tb_logs/
+events.out.tfevents.*
+
+# --- Heavy 3D Meshes & Geometry Exports ---
+*.obj
+*.stl
+*.ply
+*.fbx
+*.gltf
+*.glb
+
+# --- Generated Reconstructions & Visual Dumps ---
+results/reconstructed_volumes/*
+!results/reconstructed_volumes/.gitkeep
+
+# Keep documentation, metrics, and summary tables tracked
+!results/benchmark_summary.md
+!results/benchmark_metrics.csv
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# --- OS Specific Artifacts ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/

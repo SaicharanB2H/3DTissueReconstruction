@@ -1,0 +1,48 @@
+# ==============================================================================
+# Master Configuration: Conditional Diffusion Sparse-to-Dense 3D Reconstruction
+# ==============================================================================
+
+project:
+  name: "brats_sparse_to_dense_diffusion"
+  seed: 42
+  device: "cuda" # "cuda" or "cpu"
+  output_dir: "./experiments"
+
+# Dataset Configuration
+data:
+  data_dir: "./BraTS2020_training_data/content/data"
+  metadata_file: "./BraTS2020_training_data/content/data/meta_data.csv"
+  image_size: [240, 240]
+  total_slices: 155
+  # Primary modality: 'flair' (ch 0), 't1' (ch 1), 't1ce' (ch 2), 't2' (ch 3), or 'all' (all 4 channels)
+  modality: "flair"
+  modality_channels:
+    flair: 0
+    t1: 1
+    t1ce: 2
+    t2: 3
+  # In_channels = 1 for single modality (e.g. FLAIR), 4 for 'all'
+  in_channels: 1
+  # Train/Val/Test volume-level split ratios
+  split_ratios:
+    train: 0.70
+    val: 0.15
+    test: 0.15
+  num_workers: 4
+  pin_memory: true
+  persistent_workers: true
+
+# Sparsification Configuration
+sparsification:
+  default_stride: 4 # Keep every K-th slice (e.g. 2, 4, 8, 16)
+  eval_strides: [2, 4, 8, 16] # Strides for comprehensive evaluation
+  context_window: 1 # Number of adjacent acquired slices above/below (default: 1 on each side)
+  normalize_depth: true
+
+# Logging & Checkpointing
+logging:
+  log_interval: 50
+  val_interval: 1
+  save_top_k: 3
+  use_tensorboard: true
+  tensorboard_dir: "./experiments/tb_logs"

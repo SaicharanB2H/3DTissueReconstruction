@@ -1,0 +1,28 @@
+# ==============================================================================
+# 2D/3D Medical VAE Configuration (AutoencoderKL)
+# ==============================================================================
+
+model:
+  in_channels: 1 # Matches data.in_channels (1 for FLAIR, 4 for all)
+  out_channels: 1
+  latent_channels: 4
+  base_channels: 32 # Lightweight & fast for 8GB GPU
+  channel_multipliers: [1, 2, 4, 4] # Downsamples 240 -> 120 -> 60 -> 30 (8x compression)
+  num_res_blocks: 2
+  attention_levels: [false, false, true, true]
+  norm_num_groups: 16
+  latent_scale_factor: 0.18215 # Normalizes latent variance
+
+training:
+  batch_size: 8
+  lr: 1.0e-4
+  weight_decay: 1.0e-5
+  min_lr: 1.0e-6
+  epochs: 30
+  warmup_epochs: 2
+  kl_weight: 1.0e-5
+  l1_weight: 1.0
+  perceptual_weight: 0.05
+  grad_clip_norm: 1.0
+  mixed_precision: true # FP16 AMP
+  checkpoint_dir: "./experiments/checkpoints/vae"

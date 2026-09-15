@@ -1,0 +1,32 @@
+# ==============================================================================
+# Evaluation & Benchmark Configuration
+# ==============================================================================
+
+evaluation:
+  batch_size: 1
+  strides: [2, 4, 8, 16] # Stride factors: 2x (sanity), 4x (moderate), 8x (aggressive), 16x (stress)
+  baselines:
+    - "nearest"
+    - "linear"
+    - "cubic"
+    - "bspline_3d"
+  metrics:
+    - "psnr"
+    - "ssim"
+    - "mae"
+    - "mse"
+    - "dice" # BraTS Tumor masks (WT, TC, ET)
+  save_reconstructions: true
+  reconstructions_dir: "./results/reconstructed_volumes"
+  metrics_output_file: "./results/benchmark_metrics.csv"
+  summary_table_file: "./results/benchmark_summary.md"
+
+visualization:
+  save_plots: true
+  plots_dir: "./results/visualizations"
+  orthogonal_planes: ["axial", "coronal", "sagittal"]
+  slice_indices: [50, 75, 100]
+  render_3d: true
+  pyvista_offscreen: true
+  color_map: "gray"
+  diff_color_map: "magma"
