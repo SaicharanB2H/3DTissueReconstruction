@@ -40,6 +40,10 @@ class DiffusionNoiseScheduler(nn.Module):
         beta_end: float = 0.02,
     ):
         super().__init__()
+        if not isinstance(num_train_timesteps, int) or num_train_timesteps < 2:
+            raise ValueError("At least two training timesteps are required")
+        if beta_schedule not in ('cosine', 'linear') or not 0 < beta_start < beta_end < 1:
+            raise ValueError("Invalid noise schedule")
         self.num_train_timesteps = num_train_timesteps
 
         if beta_schedule == "cosine":
@@ -90,6 +94,7 @@ class DiffusionNoiseScheduler(nn.Module):
         prev_timestep: int,
         sample: torch.Tensor,
         eta: float = 0.0,
+        generator: Optional[torch.Generator] = None,
     ) -> Tuple[torch.Tensor, torch.Tensor]:
         """
         Computes single reverse DDIM step from t to prev_t.
@@ -106,7 +111,7 @@ class DiffusionNoiseScheduler(nn.Module):
 
         # 2. Compute variance sigma_t
         variance = (beta_prod_t_prev / beta_prod_t) * (1.0 - alpha_prod_t / alpha_prod_t_prev)
-        std_dev_t = eta * torch.sqrt(variance)
+        std_dev_t = eta * torch.sqrt(torch.clamp(variance, min=0.0))
 
         # 3. Compute direction pointing to x_t
         pred_sample_direction = torch.sqrt(torch.clamp(1.0 - alpha_prod_t_prev - std_dev_t ** 2, min=0.0)) * model_output
@@ -115,7 +120,7 @@ class DiffusionNoiseScheduler(nn.Module):
         prev_sample = torch.sqrt(alpha_prod_t_prev) * pred_original_sample + pred_sample_direction
 
         if eta > 0.0:
-            noise = torch.randn_like(sample)
+            noise = torch.randn(sample.shape, device=sample.device, dtype=sample.dtype, generator=generator)
             prev_sample = prev_sample + std_dev_t * noise
 
         return prev_sample, pred_original_sample
@@ -124,6 +129,8 @@ class DiffusionNoiseScheduler(nn.Module):
         """
         Generates evenly spaced timesteps for fast DDIM sampling (e.g. 25 steps).
         """
+        if not isinstance(num_inference_steps, int) or not 1 <= num_inference_steps <= self.num_train_timesteps:
+            raise ValueError("Inference steps must be between 1 and training timesteps")
         step_ratio = self.num_train_timesteps // num_inference_steps
         timesteps = (torch.arange(0, num_inference_steps) * step_ratio).round().long().flip(0)
         return timesteps.tolist()

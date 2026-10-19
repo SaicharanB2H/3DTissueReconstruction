@@ -65,6 +65,9 @@ class CheckpointManager:
             "models": {k: m.state_dict() for k, m in models.items()},
             "optimizers": {k: opt.state_dict() for k, opt in optimizers.items()},
         }
+        if is_best:
+            self.best_metric = min(self.best_metric, metric_value)
+        state["best_metric"] = self.best_metric
         if schedulers:
             state["schedulers"] = {k: s.state_dict() for k, s in schedulers.items()}
         if scalers:
@@ -95,7 +98,12 @@ class CheckpointManager:
         scalers: Optional[Dict[str, Any]] = None,
         device: str = "cpu",
     ) -> Dict[str, Any]:
-        checkpoint = torch.load(checkpoint_path, map_location=device)
+        checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=True)
+        self.best_metric = checkpoint.get("best_metric", float("inf"))
+        if self.best_metric == float("inf"):
+            best_path = os.path.join(self.checkpoint_dir, "best_model.pt")
+            if os.path.isfile(best_path):
+                self.best_metric = torch.load(best_path, map_location="cpu", weights_only=True).get("metric_value", float("inf"))
 
         for name, model in models.items():
             if name in checkpoint["models"]:

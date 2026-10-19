@@ -1,0 +1,183 @@
+{
+  "artifact": "D:\\StudyMaterials\\Books and materials\\Semester-7\\Project 1\\BCSE497J_Project_Report_23BAI1536.docx",
+  "sha256": "a1dca1c5369541dc0969b9a57dea16d4b6aa306c9b8029a2ed7dc9574f468715",
+  "pages": 86,
+  "renderer": "Microsoft Word native PDF export; PDFium rasterization at 108 dpi",
+  "visual_review": {
+    "pages_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86
+    ],
+    "result": "Readable; no clipping or overlapping content observed. Natural wrapping retained in code listings."
+  },
+  "geometry_cm": {
+    "page_width": 21.001,
+    "page_height": 29.7,
+    "left_margin": 3.81,
+    "right_margin": 2.54,
+    "top_margin": 2.54,
+    "bottom_margin": 2.54
+  },
+  "checks": {
+    "template_preserved": true,
+    "source_snapshots_match": true,
+    "page_count_in_range": true,
+    "continuous_arabic_footers": true,
+    "team_on_first_two_pages": true,
+    "individual_submission_pages": true,
+    "external_guide_certificate_omitted": true,
+    "no_word_field_errors": true,
+    "correct_submission": true,
+    "tables_count": true,
+    "native_equations_count": true,
+    "approved_drawings_unchanged": true,
+    "page_geometry": true,
+    "metric_8_conditional_diffusion_psnr_missing": true,
+    "metric_8_conditional_diffusion_ssim_missing": true,
+    "metric_8_linear_psnr_missing": true,
+    "metric_8_linear_ssim_missing": true,
+    "metric_16_conditional_diffusion_psnr_missing": true,
+    "metric_16_conditional_diffusion_ssim_missing": true,
+    "metric_16_linear_psnr_missing": true,
+    "metric_16_linear_ssim_missing": true
+  },
+  "measured_summary": [
+    {
+      "stride": 8,
+      "method": "conditional_diffusion",
+      "patients": 10,
+      "psnr_missing": {
+        "mean": 28.037277891722688,
+        "sample_std": 1.57667888859689
+      },
+      "ssim_missing": {
+        "mean": 0.9053625226020813,
+        "sample_std": 0.01209394981213107
+      }
+    },
+    {
+      "stride": 8,
+      "method": "linear",
+      "patients": 10,
+      "psnr_missing": {
+        "mean": 27.628295367694896,
+        "sample_std": 1.1190012722357592
+      },
+      "ssim_missing": {
+        "mean": 0.9225714325904846,
+        "sample_std": 0.009674839384140122
+      }
+    },
+    {
+      "stride": 16,
+      "method": "conditional_diffusion",
+      "patients": 10,
+      "psnr_missing": {
+        "mean": 25.071274829940126,
+        "sample_std": 1.0764038324948675
+      },
+      "ssim_missing": {
+        "mean": 0.8818072855472565,
+        "sample_std": 0.011888106628859252
+      }
+    },
+    {
+      "stride": 16,
+      "method": "linear",
+      "patients": 10,
+      "psnr_missing": {
+        "mean": 24.55028106805827,
+        "sample_std": 1.2417474068354055
+      },
+      "ssim_missing": {
+        "mean": 0.8752327501773834,
+        "sample_std": 0.012268215744011522
+      }
+    }
+  ],
+  "passed": true
+}

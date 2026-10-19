@@ -53,7 +53,7 @@ class SliceDepthEmbedding(nn.Module):
     Comprehensive multi-coordinate embedding combining:
     1. Global normalized target depth z_target / (D - 1)
     2. Relative position alpha = (z_target - z_prev) / (z_next - z_prev)
-    3. Normalized gap distance delta_z / D
+    3. Normalized gap distance delta_z / 16 (checkpoint-compatible convention)
     """
 
     def __init__(self, out_dim: int = 256, base_freq_dim: int = 32):

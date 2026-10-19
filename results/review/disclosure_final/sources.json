@@ -1,0 +1,162 @@
+[
+  {
+    "id": "R1",
+    "authors_or_organization": "Robin Rombach; Andreas Blattmann; Dominik Lorenz; Patrick Esser; Björn Ommer",
+    "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
+    "publication_date_or_version": "arXiv:2112.10752; v1 20 December 2021; v2 13 April 2022; CVPR 2022",
+    "url": "https://arxiv.org/abs/2112.10752",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R2",
+    "authors_or_organization": "Niklas Bubeck; Suprosanna Shit; Chen Chen; Can Zhao; Pengfei Guo; Dong Yang; Georg Zitzlsberger; Daguang Xu; Bernhard Kainz; Daniel Rueckert; Jiazhen Pan",
+    "title": "Latent Interpolation Learning Using Diffusion Models for Cardiac Volume Reconstruction",
+    "publication_date_or_version": "arXiv:2508.13826; v1 19 August 2025; v4 24 July 2026",
+    "url": "https://arxiv.org/abs/2508.13826",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R3",
+    "authors_or_organization": "Chenhe Du; Qing Wu; Xuanyu Tian; Jingyi Yu; Hongjiang Wei; Yuyao Zhang",
+    "title": "Improving 2D Diffusion Models for 3D Medical Imaging with Inter-Slice Consistent Stochasticity",
+    "publication_date_or_version": "arXiv:2602.04162; v1 4 February 2026; v2 9 February 2026; ICLR 2026",
+    "url": "https://arxiv.org/abs/2602.04162",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R4",
+    "authors_or_organization": "Maria H. Oleszkiewicz; Blazej R. Rutkowski; Wojciech Sobala; Piotr Padkowski; International Business Machines Corporation",
+    "title": "US11410271B2: Reconstructing missing slices in slice-based scans of 3D objects",
+    "publication_date_or_version": "Grant publication 9 August 2022; indexed priority 31 August 2018; claims 1, 11, 14 reviewed",
+    "url": "https://patents.google.com/patent/US11410271B2/en",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R5",
+    "authors_or_organization": "Newcure M Inc.; publication names inventors 추교빈 and 전영준",
+    "title": "WO2025264018A1: 3D volume data conversion method and device using multi-slice-trained 2D diffusion model, and computer program",
+    "publication_date_or_version": "Published 26 December 2025; PCT/KR2025/008522; full description and claims 1-11 retrieved; English machine translation",
+    "url": "https://patents.google.com/patent/WO2025264018A1/en",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R6",
+    "authors_or_organization": "CBICA, University of Pennsylvania; BraTS 2020 organizers",
+    "title": "Multimodal Brain Tumor Segmentation Challenge 2020: Data",
+    "publication_date_or_version": "2020 challenge data page; page update date not stated",
+    "url": "https://www.med.upenn.edu/cbica/brats2020/data.html",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R7",
+    "authors_or_organization": "Siemens Healthcare GmbH",
+    "title": "Value Partnerships - Contact Us",
+    "publication_date_or_version": "Undated official contact page",
+    "url": "https://www.siemens-healthineers.com/en-th/services/value-partnerships/contact-us",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R8",
+    "authors_or_organization": "Siemens Healthineers",
+    "title": "Deep Resolve",
+    "publication_date_or_version": "Undated official manufacturer product page",
+    "url": "https://www.siemens-healthineers.com/en-au/magnetic-resonance-imaging/technologies-and-innovations/deep-resolve",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R9",
+    "authors_or_organization": "Koninklijke Philips N.V.",
+    "title": "Annual Report 2025, Form 20-F: Cover Page / Document and Entity Information",
+    "publication_date_or_version": "Fiscal year ended 31 December 2025; SEC filing dated 19 February 2026",
+    "url": "https://www.sec.gov/Archives/edgar/data/313216/000162828026009470/R1.htm",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R10",
+    "authors_or_organization": "Koninklijke Philips N.V.",
+    "title": "Philips 2025 annual results",
+    "publication_date_or_version": "2025 annual results, released in 2026",
+    "url": "https://www.results.philips.com/ar25",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R11",
+    "authors_or_organization": "Bert van Meurs; Jie Xue; Koninklijke Philips N.V.",
+    "title": "Capital Markets Day: Diagnosis & Treatment",
+    "publication_date_or_version": "10 February 2026, slides 3 and 5",
+    "url": "https://www.philips.com/c-dam/corporate/about-philips/investors/calendar/2026/3_-_Diagnosis_and_Treatment.pdf",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R12",
+    "authors_or_organization": "GE HealthCare Technologies Inc.",
+    "title": "Investor FAQs",
+    "publication_date_or_version": "Undated official page; accessed 8 October 2026",
+    "url": "https://investor.gehealthcare.com/resources/investor-faqs",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R13",
+    "authors_or_organization": "GE HealthCare",
+    "title": "AIR Recon DL receives FDA clearance of 3D and motion-insensitive imaging applications",
+    "publication_date_or_version": "29 September 2022, manufacturer announcement",
+    "url": "https://www.gehealthcare.com/en/about/newsroom/press-releases/air-recon-dl-receives-fda-clearance-of-3d-and-motion-insensitive-imaging-application",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R14",
+    "authors_or_organization": "Canon Medical Systems Corporation",
+    "title": "Corporate Information",
+    "publication_date_or_version": "Undated official corporate page; accessed 8 October 2026",
+    "url": "https://sg.medical.canon/about-us/corporate/corporate-information/",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R15",
+    "authors_or_organization": "Garry E. Gold; Canon Medical Systems",
+    "title": "Deep Learning Reconstruction in Clinical MRI: a new realm combining ultra-high resolution and increased productivity",
+    "publication_date_or_version": "Undated manufacturer publication; accessed 8 October 2026",
+    "url": "https://global.medical.canon/publications/mri/ai/deep-learning-reconstruction-in-clinical-mri/",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R16",
+    "authors_or_organization": "FUJIFILM Healthcare Americas Corporation",
+    "title": "Echelon Synergy MRI",
+    "publication_date_or_version": "Undated official product/contact page; accessed 8 October 2026",
+    "url": "https://healthcaresolutions-us.fujifilm.com/products/diagnostic-imaging/mri/echelon-synergy/",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R17",
+    "authors_or_organization": "Yanke Wang; Yolanne Y. R. Lee; Aurelio Dolfini; Markus Reischl; Ender Konukoglu; Kyriakos Flouris",
+    "title": "Energy-Based Prior Latent Space Diffusion model for Reconstruction of Lumbar Vertebrae from Thick Slice MRI",
+    "publication_date_or_version": "arXiv:2412.00511v1, 30 November 2024; MICCAI DGM workshop 2024",
+    "url": "https://arxiv.org/abs/2412.00511",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R18",
+    "authors_or_organization": "Xingjian Tang; Jingwei Guan; Linge Li; Ran Shi; Youmei Zhang; Mengye Lyu; Li Yan",
+    "title": "LDPM: Towards undersampled MRI reconstruction with MR-VAE and Latent Diffusion Prior",
+    "publication_date_or_version": "arXiv:2411.02951; v1 5 November 2024; v3 6 June 2025; EMBC 2025",
+    "url": "https://arxiv.org/abs/2411.02951",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R19",
+    "authors_or_organization": "Newcure M Inc.; named inventors in the Korean publication",
+    "title": "KR102905764B1: Method, apparatus and computer program for 3D volume data conversion using multi-slice learned 2D diffusion models",
+    "publication_date_or_version": "Grant publication 31 December 2025; indexed family/status only, official-register verification pending",
+    "url": "https://patents.google.com/patent/KR102905764B1/en",
+    "accessed": "2026-10-08"
+  },
+  {
+    "id": "R20",
+    "authors_or_organization": "Jiaming Song; Chenlin Meng; Stefano Ermon",
+    "title": "Denoising Diffusion Implicit Models",
+    "publication_date_or_version": "arXiv:2010.02502; v1 6 October 2020; v4 5 October 2022; ICLR 2021",
+    "url": "https://arxiv.org/abs/2010.02502",
+    "accessed": "2026-10-08"
+  }
+]

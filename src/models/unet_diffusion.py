@@ -64,8 +64,7 @@ class SpatialCrossAttention(nn.Module):
         v = self.to_v(context).reshape(B, -1, self.num_heads, self.head_dim).permute(0, 2, 1, 3)  # (B, heads, N, head_dim)
 
         # Scaled dot-product attention: (HW, N)
-        attn = torch.softmax((q @ k.transpose(-1, -2)) * self.scale, dim=-1)
-        out = attn @ v # (B, heads, HW, head_dim)
+        out = F.scaled_dot_product_attention(q, k, v)
 
         out = out.permute(0, 2, 1, 3).reshape(B, H * W, C)
         out = self.to_out(out)

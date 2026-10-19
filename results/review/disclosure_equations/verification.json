@@ -1,0 +1,159 @@
+{
+  "docx_sha256": "ea781e0e25a65129ce0ddd364f2ba668f355e100de705acb5bbfe16f2562dfb2",
+  "math_counts": {
+    "oMath": 70,
+    "f": 11,
+    "rad": 6,
+    "sSub": 36,
+    "sSup": 11,
+    "acc": 8
+  },
+  "changes": [
+    {
+      "paragraph": 106,
+      "original": "Coordinates: alpha=(z-z_prev)/(z_next-z_prev), depth=z/(D-1), gap=(z_next-z_prev)/16.",
+      "equations": 3
+    },
+    {
+      "paragraph": 107,
+      "original": "Normalization: I_norm=2*(clip(I,vmin,vmax)-vmin)/(vmax-vmin+epsilon)-1, with background mapped to -1 and epsilon=1e-7.",
+      "equations": 2
+    },
+    {
+      "paragraph": 108,
+      "original": "Clean latent: z0=0.18215*(mu+sigma*epsilon).",
+      "equations": 1
+    },
+    {
+      "paragraph": 109,
+      "original": "Forward diffusion: z_t=sqrt(alpha_bar_t)*z0+sqrt(1-alpha_bar_t)*epsilon.",
+      "equations": 1
+    },
+    {
+      "paragraph": 110,
+      "original": "Noise objective: E[||epsilon-epsilon_theta(z_t,t,context)||^2].",
+      "equations": 1
+    },
+    {
+      "paragraph": 111,
+      "original": "Deterministic DDIM: predicted z0=(z_t-sqrt(1-alpha_bar_t)*epsilon_theta)/sqrt(alpha_bar_t); z_prev=sqrt(alpha_bar_prev)*predicted z0+sqrt(1-alpha_bar_prev)*epsilon_theta.",
+      "equations": 2
+    },
+    {
+      "paragraph": 112,
+      "original": "VAE objective: L1+0.5*MSE+1e-5*KL+0.1*spatial-gradient L1.",
+      "equations": 1
+    },
+    {
+      "paragraph": 113,
+      "original": "Reconstruction MSE=mean((prediction-target)^2); MAE=mean(abs(prediction-target)); PSNR=10*log10(4/MSE) for [-1,1], with a 100 dB sentinel returned when MSE <= 1e-10.",
+      "equations": 4
+    },
+    {
+      "paragraph": 114,
+      "original": "SSIM uses an 11x11 Gaussian window (sigma 1.5), constants (0.01*2)^2 and (0.03*2)^2, averaged over 2D slices/channels.",
+      "equations": 4
+    },
+    {
+      "paragraph": 39,
+      "original": "Inputs and metadata validator; Hierarchical Data Format version 5 (HDF5, stored as .h5 files) slice reader; acquired-only intensity normalizer; depth/context extractor; weight-tied residual convolutional encoder (base channels 32); three-coordinate Fourier embedding; 17x256 context tokens and 8x30x30 spatial maps; pretrained MedicalAutoencoderKL (4x30x30 latent); conditional U-Net (base channels 64, multipliers 1/2/4); 1000-step noise scheduler; DDIM sampler; batch assembly and optional depth smoothing; Neuroimaging Informatics Technology Initiative (NIfTI)/HDF5 exporter; fidelity metrics and visualization modules. Software runs in Python/PyTorch on CPU or CUDA, with GPU used for the measured experiments.",
+      "equations": 3
+    },
+    {
+      "paragraph": 44,
+      "original": "Input: a registered depth-first stack (D,C,H,W) and unique acquired depth indices including both boundaries. Validate channels, dimensions, finite values and checkpoints. Derive 0.5th/99.5th percentile foreground intensity bounds only from acquired slices; apply the same clipping/scaling to context and targets. For each missing depth locate bounding acquired slices and calculate z/(D-1), alpha and gap/16. Encode context, seed a Gaussian latent, predict noise through 25 or 50 DDIM updates, decode and assign the generated slice. Optionally apply Gaussian smoothing (sigma 0.5 along depth) and restore original acquired values. Export a research NIfTI/HDF5 volume with normalization, seed and checkpoint provenance; evaluate against withheld targets only when available.",
+      "equations": 3
+    },
+    {
+      "paragraph": 57,
+      "original": "Stride 8: selected missing-slice PSNR 28.037 +/- 1.577 dB, SSIM 0.9054 +/- 0.0121; corrected raw 25-step reference PSNR 28.037 dB, SSIM 0.9054; linear PSNR 27.628 dB, SSIM 0.9226.",
+      "equations": 2
+    },
+    {
+      "paragraph": 58,
+      "original": "Stride 16: selected missing-slice PSNR 25.071 +/- 1.076 dB, SSIM 0.8818 +/- 0.0119; corrected raw 25-step reference PSNR 25.071 dB, SSIM 0.8818; linear PSNR 24.550 dB, SSIM 0.8752.",
+      "equations": 2
+    },
+    {
+      "paragraph": 94,
+      "original": "Input: a registered depth-first stack (D,C,H,W) and unique acquired depth indices including both boundaries. Validate channels, dimensions, finite values and checkpoints. Derive 0.5th/99.5th percentile foreground intensity bounds only from acquired slices; apply the same clipping/scaling to context and targets. For each missing depth locate bounding acquired slices and calculate z/(D-1), alpha and gap/16. Encode context, seed a Gaussian latent, predict noise through 25 or 50 DDIM updates, decode and assign the generated slice. Optionally apply Gaussian smoothing (sigma 0.5 along depth) and restore original acquired values. Export a research NIfTI/HDF5 volume with normalization, seed and checkpoint provenance; evaluate against withheld targets only when available.",
+      "equations": 3
+    },
+    {
+      "paragraph": 95,
+      "original": "Working example: D=155, C=1, H=W=240. At stride 8, acquired indices include 0,8,...,152,154 (21 acquired and 134 missing); at stride 16 they include 0,16,...,144,154 (11 acquired and 144 missing). A target at z=12 bounded by z=8 and z=16 has alpha=0.5, depth=12/154 and normalized gap=0.5. Context is computed only from those acquired slices. The trained VAE maps a 240x240 image to four 30x30 latent channels: 8x spatial downsampling per axis and 16x scalar-element reduction for FLAIR. Code path and results are supplied in sections 15-17.",
+      "equations": 11
+    },
+    {
+      "paragraph": 102,
+      "original": "Stride 8: selected missing-slice PSNR 28.037 +/- 1.577 dB, SSIM 0.9054 +/- 0.0121; corrected raw 25-step reference PSNR 28.037 dB, SSIM 0.9054; linear PSNR 27.628 dB, SSIM 0.9226.",
+      "equations": 2
+    },
+    {
+      "paragraph": 103,
+      "original": "Stride 16: selected missing-slice PSNR 25.071 +/- 1.076 dB, SSIM 0.8818 +/- 0.0119; corrected raw 25-step reference PSNR 25.071 dB, SSIM 0.8818; linear PSNR 24.550 dB, SSIM 0.8752.",
+      "equations": 2
+    },
+    {
+      "paragraph": 116,
+      "original": "Audit trail: results/review/test_reference.csv and test_selected.csv contain per-volume metrics; test_reference.json and test_selected.json contain settings and checkpoint identities; experiment_manifest.json, validation_reference.csv, validation_candidate.csv, selection.json, paired_comparison.csv and completion.json record the protocol and selection. Global seed=42; reconstruction seed=42+100*volume_id+stride, e.g. volume 14/stride 8 uses seed 1450. Evaluation uses range [-1,1], missing planes only, 11x11 Gaussian SSIM window sigma=1.5 with zero padding. Generation timing excludes smoothing/metrics, while baseline row timing includes metrics; these values do not support a fair speed-superiority comparison.",
+      "equations": 5
+    },
+    {
+      "paragraph": 119,
+      "original": "Within each volume, PSNR is computed from MSE pooled across all missing-plane pixels; SSIM is averaged across 2D slices/channels. The reported group mean and sample standard deviation summarize the ten per-volume values. DDIM sampling follows the established implicit diffusion formulation (R20), with eta=0 here. The VAE posterior sampling noise and the forward diffusion noise are separate Gaussian draws. Normalization maps intensities <= 1e-7 to background -1; if acquired bounds are degenerate, the implementation uses vmax=vmin+1.",
+      "equations": 3
+    },
+    {
+      "paragraph": 120,
+      "original": "Baseline terminology: smoothed linear interpolation means linear interpolation followed by Gaussian depth smoothing (sigma=0.7). The historical Bspline_3d name is retained only as a compatibility alias; it does not denote a B-spline algorithm.",
+      "equations": 1
+    },
+    {
+      "paragraph": 130,
+      "original": "Local data: 57,195 HDF5 slice files representing 369 volume IDs, each 155 axial planes at 240x240. Each image has four stored channels; current code assumes FLAIR/T1/T1ce/T2 ordering, which requires original HDF5 converter provenance confirmation. Three uint8 mask channels exist; sampled channels are mutually exclusive, so WT/TC/ET semantics are not assumed. Original BraTS is multi-institutional brain-tumor MRI with expert annotations (R6). Patient-volume split uses seed 42: 258 train, 55 validation, 56 test. These are internal partitions of the local training collection, not official challenge test data. Diffusion trains only on missing target planes. Fine-tuning uses equal-probability strides 4/8/16 and acquired-only intensity statistics; VAE stays frozen and encoder/U-Net receive MSE noise-prediction updates with AdamW and gradient clipping. Five fixed validation volumes select settings; ten held-out volumes provide final comparisons. The review experiments use the local collection; no independent clinical study was supplied. Earlier checkpoint/data provenance remains unverified. Fine-tuning completed 3000 training iterations (24000 sampled slice examples with replacement) in 18.49 minutes, stopping at the configured step cap within the 70-minute limit. The candidate did not satisfy the validation improvement criterion, so the corrected original checkpoint remains selected.",
+      "equations": 1
+    },
+    {
+      "paragraph": 214,
+      "original": "155 depths; 240x240; learned C=1 assumed FLAIR",
+      "equations": 2
+    },
+    {
+      "paragraph": 218,
+      "original": "25/50 compared; selected 25; eta=0",
+      "equations": 1
+    },
+    {
+      "paragraph": 222,
+      "original": "Foreground 0.5/99.5 percentiles; [-1,1]; epsilon=1e-7",
+      "equations": 2
+    },
+    {
+      "paragraph": 226,
+      "original": "Off / Gaussian sigma=0.5 compared; selected on",
+      "equations": 1
+    },
+    {
+      "paragraph": 230,
+      "original": "Raw / available EMA compared; candidate EMA decay=0.999",
+      "equations": 1
+    },
+    {
+      "paragraph": 234,
+      "original": "2e-5; AdamW; weight decay=1e-4; clip norm=1",
+      "equations": 3
+    },
+    {
+      "paragraph": 242,
+      "original": "4x30x30; scale=0.18215; 17x256 tokens; 8 spatial channels",
+      "equations": 3
+    }
+  ],
+  "diagrams_unchanged": true,
+  "outer_rows": 67,
+  "authoring": "Microsoft MML2OMML.XSL; editable native OMML",
+  "final_document": "D:\\StudyMaterials\\Books and materials\\Semester-7\\Project 1\\Invention_Disclosure_Word_Equations_Final.docx",
+  "native_equations": 70,
+  "latest_open_copy_preserved": true
+}

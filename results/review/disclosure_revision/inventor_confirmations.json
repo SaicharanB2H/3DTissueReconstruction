@@ -1,0 +1,25 @@
+{
+  "recorded_on": "2026-10-08",
+  "source": "Direct user answers in this chat",
+  "inventors": [
+    {
+      "name": "Dr. Sarita Singh",
+      "affiliation": "SCOPE Department, Vellore Institute of Technology, Chennai",
+      "name_answer_verbatim": "Dr. Sarita Singh",
+      "affiliation_answer_verbatim": "Scope Department,Vellore Institute of Technology Chennai",
+      "contribution": null,
+      "address": null,
+      "email": null
+    }
+  ],
+  "complete_inventor_list_confirmed": false,
+  "ownership": null,
+  "funding": null,
+  "conception_date": null,
+  "reduction_to_practice_date": null,
+  "public_disclosures": null,
+  "dataset_provenance": null,
+  "checkpoint_provenance": null,
+  "additional_validated_parameter_ranges": null,
+  "institutional_trl_confirmation": null
+}

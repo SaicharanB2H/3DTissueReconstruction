@@ -95,9 +95,7 @@ class AttentionBlock2D(nn.Module):
         v = v.reshape(B, self.num_heads, dim_head, H * W).transpose(-1, -2)
 
         # Scaled dot-product attention
-        scale = 1.0 / (dim_head ** 0.5)
-        attn = torch.softmax((q @ k.transpose(-1, -2)) * scale, dim=-1)
-        out = attn @ v # (B, heads, H*W, dim_head)
+        out = F.scaled_dot_product_attention(q, k, v)
 
         out = out.transpose(-1, -2).reshape(B, C, H, W)
         return x + self.proj_out(out)

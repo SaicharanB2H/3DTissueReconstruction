@@ -44,6 +44,7 @@ class Volume3DVisualizer:
         volume_id: int,
         stride: int,
         save_name: Optional[str] = None,
+        method_name: str = "Reconstructed",
     ) -> str:
         """
         Renders a 3-panel 3D figure comparing:
@@ -71,7 +72,7 @@ class Volume3DVisualizer:
         grid_dense = pv.ImageData()
         grid_dense.dimensions = dense_arr.shape
         grid_dense.point_data["values"] = dense_arr.flatten(order="F")
-        plotter.add_text("Diffusion Reconstructed 3D", font_size=12)
+        plotter.add_text(f"{method_name} 3D", font_size=12)
         plotter.add_volume(grid_dense, cmap="bone", opacity="linear", shade=True)
         plotter.show_bounds(grid="front", location="outer", all_edges=True)
 

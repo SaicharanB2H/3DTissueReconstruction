@@ -8,6 +8,8 @@ Supports:
 import os
 import sys
 import argparse
+import json
+from pathlib import Path
 import numpy as np
 import nibabel as nib
 import matplotlib.pyplot as plt
@@ -17,17 +19,16 @@ from matplotlib.widgets import Slider
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 
-def load_nifti(path: str) -> np.ndarray:
-    """Loads a NIfTI volume as float32 numpy array, guaranteed in (D, H, W) orientation."""
+def load_nifti(path: str, channel: int = 0) -> np.ndarray:
+    """Load project exports from H,W,D[,C] into D,H,W; axes are not patient orientation."""
     nii = nib.load(path)
     data = nii.get_fdata().astype(np.float32)
     # Squeeze channel dim if present
     if data.ndim == 4:
-        data = data[0] if data.shape[0] == 1 else data[..., 0]
-    # NIfTI files are saved as (H, W, D) = (240, 240, 155) -> transpose to (D, H, W) = (155, 240, 240)
-    if data.shape[-1] < min(data.shape[0], data.shape[1]):
-        data = np.transpose(data, (2, 0, 1))
-    return data
+        data = data[..., channel]
+    if data.ndim != 3:
+        raise ValueError('Expected H,W,D or H,W,D,C project export')
+    return np.transpose(data, (2, 0, 1))
 
 
 def interactive_viewer(
@@ -48,11 +49,11 @@ def interactive_viewer(
         fig.suptitle(f"{title} (Slice {init_z}/{D-1})", fontsize=14, fontweight="bold")
         plt.subplots_adjust(bottom=0.2)
 
-        im_recon = axes[0].imshow(recon_vol[init_z], cmap="gray", origin="lower", vmin=0, vmax=1)
-        axes[0].set_title("Reconstructed (Diffusion)")
+        im_recon = axes[0].imshow(recon_vol[init_z], cmap="gray", origin="lower", vmin=-1, vmax=1)
+        axes[0].set_title("Reconstructed")
         axes[0].axis("off")
 
-        im_gt = axes[1].imshow(gt_vol[init_z], cmap="gray", origin="lower", vmin=0, vmax=1)
+        im_gt = axes[1].imshow(gt_vol[init_z], cmap="gray", origin="lower", vmin=-1, vmax=1)
         axes[1].set_title("Ground Truth")
         axes[1].axis("off")
 
@@ -67,7 +68,7 @@ def interactive_viewer(
         fig.suptitle(f"{title} (Slice {init_z}/{D-1})", fontsize=14, fontweight="bold")
         plt.subplots_adjust(bottom=0.2)
 
-        im_recon = ax.imshow(recon_vol[init_z], cmap="gray", origin="lower", vmin=0, vmax=1)
+        im_recon = ax.imshow(recon_vol[init_z], cmap="gray", origin="lower", vmin=-1, vmax=1)
         ax.set_title("Axial Slice")
         ax.axis("off")
 
@@ -124,7 +125,7 @@ def export_slice_montage(
     axes = np.array(axes).reshape(-1)
 
     for i, z in enumerate(slice_indices):
-        axes[i].imshow(recon_vol[z], cmap="gray", origin="lower", vmin=0, vmax=1)
+        axes[i].imshow(recon_vol[z], cmap="gray", origin="lower", vmin=-1, vmax=1)
         axes[i].set_title(f"Slice z = {z}", fontsize=11)
         axes[i].axis("off")
 
@@ -189,11 +190,13 @@ def main():
         try:
             ds = BraTSVolumeDataset(args.data_dir, [vol_id], modality="flair")
             gt_data = ds[0]
-            gt_vol = gt_data["volume"].numpy()[0]  # (155, 240, 240)
-            # Normalize gt to match recon intensity range [-1, 1]
-            vmin, vmax = gt_vol.min(), gt_vol.max()
-            if vmax > vmin:
-                gt_vol = (gt_vol - vmin) / (vmax - vmin) * 2.0 - 1.0
+            sidecar = Path(args.file + '.json')
+            if not sidecar.exists():
+                raise ValueError('Normalization sidecar required for a comparable ground-truth view')
+            metadata = json.loads(sidecar.read_text(encoding='utf-8'))
+            from src.data.transforms import MedicalIntensityNormalizer
+            gt_vol, _ = MedicalIntensityNormalizer().normalize(gt_data['volume_raw'], stats=metadata['normalization_stats'])
+            gt_vol = gt_vol.numpy()[:, 0]
             print(f"Loaded ground truth for Volume {vol_id}")
         except Exception as e:
             print(f"Could not load ground truth: {e}")

@@ -110,7 +110,7 @@ class SharedSliceEncoder(nn.Module):
         feat_next = self.shared_backbone(next_slice) # (B, C_feat, 30, 30)
 
         # 2. Linear blend weighted by alpha as guide
-        alpha_map = alpha.view(B, 1, 1, 1).expand(B, 1, 30, 30)
+        alpha_map = alpha.view(B, 1, 1, 1).expand(B, 1, *feat_prev.shape[-2:])
         spatial_input = torch.cat([feat_prev, feat_next, alpha_map], dim=1) # (B, C_feat*2 + 1, 30, 30)
         spatial_context = self.spatial_fusion(spatial_input) # (B, out_spatial_c, 30, 30)
 

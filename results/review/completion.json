@@ -1,0 +1,14 @@
+{
+  "status": "completed",
+  "seconds": 2421.7810000000027,
+  "use_candidate": false,
+  "mean_test_psnr_gain": 0.0,
+  "mean_test_ssim_gain": 0.0,
+  "reference_validation_settings": {
+    "weights": "raw",
+    "steps": 25,
+    "smoothing": true,
+    "psnr_missing": 26.186236641119233,
+    "ssim_missing": 0.8911405444145203
+  }
+}

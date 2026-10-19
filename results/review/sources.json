@@ -1,0 +1,57 @@
+[
+  [
+    "R1",
+    "Rombach et al. High-Resolution Image Synthesis with Latent Diffusion Models (2021/2022)",
+    "https://arxiv.org/abs/2112.10752"
+  ],
+  [
+    "R2",
+    "Bubeck et al. Latent Interpolation Learning Using Diffusion Models for Cardiac Volume Reconstruction (first posted 19 Aug 2025)",
+    "https://arxiv.org/abs/2508.13826"
+  ],
+  [
+    "R3",
+    "Du et al. Improving 2D Diffusion Models for 3D Medical Imaging with Inter-Slice Consistent Stochasticity (2026)",
+    "https://arxiv.org/abs/2602.04162"
+  ],
+  [
+    "R4",
+    "US11410271B2, Reconstructing missing slices in slice-based scans of 3D objects (9 Aug 2022); claims 1, 11, 14 reviewed",
+    "https://patents.google.com/patent/US11410271B2/en"
+  ],
+  [
+    "R5",
+    "WO2025264018A1, multi-slice-trained 2D diffusion for 3D volume conversion: bibliographic lead; full text retrieval unavailable",
+    "https://patents.google.com/patent/WO2025264018A1/en"
+  ],
+  [
+    "R6",
+    "Official BraTS 2020 imaging and annotation description",
+    "https://www.med.upenn.edu/cbica/brats2020/data.html"
+  ],
+  [
+    "R7",
+    "Siemens Healthcare GmbH official contact address",
+    "https://www.siemens-healthineers.com/en-th/services/value-partnerships/contact-us"
+  ],
+  [
+    "R8",
+    "Siemens Deep Resolve manufacturer description",
+    "https://www.siemens-healthineers.com/en-au/magnetic-resonance-imaging/technologies-and-innovations/deep-resolve"
+  ],
+  [
+    "R9",
+    "Koninklijke Philips N.V. 2025 SEC filing: principal address",
+    "https://www.sec.gov/Archives/edgar/data/313216/000162828026009470/R1.htm"
+  ],
+  [
+    "R10",
+    "Philips 2025 annual results",
+    "https://www.results.philips.com/ar25"
+  ],
+  [
+    "R11",
+    "Philips Diagnosis & Treatment investor presentation (2026)",
+    "https://www.philips.com/c-dam/corporate/about-philips/investors/calendar/2026/3_-_Diagnosis_and_Treatment.pdf"
+  ]
+]

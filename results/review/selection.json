@@ -1,0 +1,17 @@
+{
+  "use_candidate": false,
+  "weights": "raw",
+  "steps": 25,
+  "smoothing": true,
+  "validation_psnr_missing": 26.186236641119233,
+  "validation_ssim_missing": 0.8911405444145203,
+  "reference_best": {
+    "weights": "raw",
+    "steps": 25,
+    "smoothing": true,
+    "psnr_missing": 26.186236641119233,
+    "ssim_missing": 0.8911405444145203
+  },
+  "criterion": "mean missing PSNR across five validation patients and strides 8/16, non-decreasing SSIM",
+  "checkpoint": "D:\\StudyMaterials\\Books and materials\\Semester-7\\Project 1\\experiments\\checkpoints\\diffusion\\best_model.pt"
+}

@@ -1,0 +1,57 @@
+{
+  "output": "D:\\StudyMaterials\\Books and materials\\Semester-7\\Project 1\\BCSE497J_Project_Report_23BAI1536.docx",
+  "template_sha256": "3d4f5aef201fc9d295314ddbc0861f264861f0fc098325263bc5f01c1f4b0e74",
+  "tables": 19,
+  "figures": 4,
+  "native_math": 13,
+  "source_snapshots": [
+    {
+      "file": "src/data/preprocessing.py",
+      "sha256": "25bc8cd6dd8bc3d36de16f3ddd204b641c128798791516e89c237577e8eea0e6",
+      "lines": 20
+    },
+    {
+      "file": "src/data/sparsifier.py",
+      "sha256": "44fc32e3161ce18e353bbe2e679c766c266ece908f92ed13874dc50d371697ef",
+      "lines": 131
+    },
+    {
+      "file": "src/data/transforms.py",
+      "sha256": "8a11895eb16bcf0c4f581ef1a92f7d3ceb2f3d7e604a68b2eddd50d017f9e04e",
+      "lines": 130
+    },
+    {
+      "file": "src/models/factory.py",
+      "sha256": "58aa1d91c96eab6e98f83ee41af7c4c14b6d74606d1457850986f8a91fc85369",
+      "lines": 109
+    },
+    {
+      "file": "src/models/pipeline.py",
+      "sha256": "58605d1d54935cf02cb58c3179bc8006edda4320cd43f356f08fae90e5a529e5",
+      "lines": 188
+    },
+    {
+      "file": "src/models/scheduler.py",
+      "sha256": "a0f20318dacf94c6400c488ea2d003eb5012df515d2435db67fa02dcc73bd6fd",
+      "lines": 136
+    },
+    {
+      "file": "src/evaluation/metrics.py",
+      "sha256": "a23085a3d68f6d77afd21e54b6cccd5700306dbe63ec2b77cfc19792adee657d",
+      "lines": 167
+    },
+    {
+      "file": "src/utils/volume_io.py",
+      "sha256": "2ac91c4f1ad4ea95888f41aea08391304c165f9cefbd553bde2463bf4c1c4345",
+      "lines": 35
+    },
+    {
+      "file": "tests/test_review.py",
+      "sha256": "36838e2d9168d41cd79c815735eda3d4cfa71211d279bae0f8fcfbed33e1121d",
+      "lines": 129
+    }
+  ],
+  "external_guide_certificate": false,
+  "submission": "October 2026",
+  "render_required": true
+}

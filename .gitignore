@@ -53,7 +53,8 @@ coverage.xml
 # --- Datasets (Heavy Medical Volumes) ---
 BraTS2020_training_data/
 BraTS20_training_data/
-data/
+/data/
+.review_tools/
 *.h5
 *.hdf5
 *.nii
@@ -106,3 +107,54 @@ ehthumbs.db
 Thumbs.db
 Desktop.ini
 $RECYCLE.BIN/
+
+# --- Local tooling, document working files, and credentials ---
+/.report_revision/
+.env.*
+!.env.example
+!.env.template
+*.log
+~$*
+*.tmp
+*.bak
+*.blend1
+*.blend2
+
+# --- Generated arrays, mesh sidecars, and smoke runs ---
+*.npy
+*.npz
+*.mtl
+/experiments/review/smoke/
+/results/review/cli_baseline_smoke/
+
+# --- Document extraction and visual QA intermediates ---
+/results/review/document_extraction/
+/results/review/**/native_pages/
+/results/review/**/lo_pages/
+/results/review/**/lo_check/
+/results/review/project_report/*_pages/
+/results/review/project_report/template_image*
+/results/review/project_report/template_native.pdf
+/results/review/project_report/*_page_text.json
+/results/review/**/native_page_text.json
+/results/review/**/lo_page_text.json
+/results/review/**/native_render_status.json
+/results/review/**/*Before*.docx
+/results/review/disclosure_final/native_word.pdf
+/results/review/disclosure_final/native_word_corrected.pdf
+/results/review/disclosure_equations/Invention_Disclosure_Final.pdf
+/results/review/disclosure_equations/Invention_Disclosure_Word_Equations_Final.pdf
+/results/review/disclosure_equations/native_word_equations.pdf
+
+# Redundant presentation archive and byte-identical non-final deck.
+/PPT.zip
+/3D Medical Volume Reconstruction via Latent Diffusion.pptx
+
+# Local academic documents and presentation bundles are shared separately.
+*.docx
+*.pptx
+*.pdf
+*.zip
+/PPT/
+/Architecture.png
+/BraTS20 Training Metadata.csv

@@ -19,6 +19,7 @@ from src.models.vae import MedicalAutoencoderKL
 from src.training.losses import VAELoss
 from src.utils.logger import setup_logger, MetricTracker
 from src.utils.checkpoint import CheckpointManager
+from src.models.factory import seed_everything
 
 
 def train_vae(config_path: str = "configs/vae_config.yaml", default_config_path: str = "configs/default_config.yaml"):
@@ -26,6 +27,7 @@ def train_vae(config_path: str = "configs/vae_config.yaml", default_config_path:
         vae_cfg = yaml.safe_load(f)
     with open(default_config_path, "r") as f:
         default_cfg = yaml.safe_load(f)
+    seed_everything(default_cfg["project"]["seed"])
 
     device = default_cfg["project"]["device"] if torch.cuda.is_available() else "cpu"
     logger = setup_logger("TrainVAE", default_cfg["logging"]["tensorboard_dir"])
@@ -72,16 +74,16 @@ def train_vae(config_path: str = "configs/vae_config.yaml", default_config_path:
         batch_size=batch_size,
         shuffle=True,
         num_workers=num_workers,
-        pin_memory=True,
-        persistent_workers=(num_workers > 0),
+        pin_memory=default_cfg['data'].get('pin_memory', True),
+        persistent_workers=(num_workers > 0 and default_cfg['data'].get('persistent_workers', True)),
     )
     val_loader = DataLoader(
         val_dataset,
         batch_size=batch_size,
         shuffle=False,
         num_workers=num_workers,
-        pin_memory=True,
-        persistent_workers=(num_workers > 0),
+        pin_memory=default_cfg['data'].get('pin_memory', True),
+        persistent_workers=(num_workers > 0 and default_cfg['data'].get('persistent_workers', True)),
     )
 
     # 2. Model, Loss, Optimizer
@@ -93,11 +95,14 @@ def train_vae(config_path: str = "configs/vae_config.yaml", default_config_path:
         base_channels=vae_cfg["model"]["base_channels"],
         channel_multipliers=vae_cfg["model"]["channel_multipliers"],
         num_res_blocks=vae_cfg["model"]["num_res_blocks"],
+        scale_factor=vae_cfg["model"].get("latent_scale_factor", 0.18215),
     ).to(device)
 
     criterion = VAELoss(
         l1_weight=vae_cfg["training"]["l1_weight"],
         kl_weight=vae_cfg["training"]["kl_weight"],
+        l2_weight=vae_cfg["training"].get("l2_weight", 0.5),
+        gradient_weight=vae_cfg["training"].get("gradient_weight", 0.1),
     ).to(device)
 
     optimizer = torch.optim.AdamW(
@@ -111,7 +116,8 @@ def train_vae(config_path: str = "configs/vae_config.yaml", default_config_path:
         optimizer, T_max=epochs, eta_min=vae_cfg["training"]["min_lr"]
     )
 
-    scaler = GradScaler('cuda', enabled=vae_cfg["training"]["mixed_precision"])
+    amp_enabled = vae_cfg["training"]["mixed_precision"] and device == 'cuda'
+    scaler = GradScaler('cuda', enabled=amp_enabled)
     checkpoint_mgr = CheckpointManager(vae_cfg["training"]["checkpoint_dir"])
     tracker = MetricTracker(default_cfg["logging"]["tensorboard_dir"])
 
@@ -128,7 +134,7 @@ def train_vae(config_path: str = "configs/vae_config.yaml", default_config_path:
     )
     if ckpt is not None:
         start_epoch = ckpt["epoch"] + 1
-        best_val_loss = ckpt.get("metric_value", float("inf"))
+        best_val_loss = checkpoint_mgr.best_metric
         logger.info(
             f"--> Resumed from latest checkpoint: completed epoch {ckpt['epoch']}. "
             f"Continuing from epoch {start_epoch}/{epochs} (Best Val Loss: {best_val_loss:.4f})"
@@ -149,7 +155,7 @@ def train_vae(config_path: str = "configs/vae_config.yaml", default_config_path:
             x = batch["target"].to(device) # (B, C, H, W)
             optimizer.zero_grad()
 
-            with autocast('cuda', enabled=vae_cfg["training"]["mixed_precision"]):
+            with autocast(device, enabled=amp_enabled):
                 recon, posterior = model(x, sample_posterior=True)
                 loss, metrics = criterion(recon, x, posterior)
 
@@ -174,7 +180,7 @@ def train_vae(config_path: str = "configs/vae_config.yaml", default_config_path:
         with torch.no_grad():
             for batch in tqdm(val_loader, desc=f"Epoch {epoch}/{epochs} [Val]"):
                 x = batch["target"].to(device)
-                with autocast('cuda', enabled=vae_cfg["training"]["mixed_precision"]):
+                with autocast(device, enabled=amp_enabled):
                     recon, posterior = model(x, sample_posterior=False)
                     loss, metrics = criterion(recon, x, posterior)
                 for k, v in metrics.items():

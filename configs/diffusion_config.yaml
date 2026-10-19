@@ -4,11 +4,12 @@
 
 # Shared Slice Encoder + Positional Embedding
 encoder:
-  backbone: "resnet18" # "resnet18", "convnet", or "custom"
+  backbone: "residual_convnet" # Custom weight-tied residual convolutional encoder
+  base_channels: 32
+  spatial_channels: 8
   in_channels: 1 # Matches modality in_channels
   pretrained: false # Trained from scratch on medical context
-  pos_emb_dim: 64
-  pos_emb_type: "fourier" # "fourier", "sinusoidal", "learned"
+  pos_emb_type: "fourier" # Supported coordinate embedding
   out_context_dim: 256
   num_context_tokens: 16
 
@@ -19,11 +20,10 @@ unet:
   base_channels: 64
   channel_multipliers: [1, 2, 4] # Latent spatial sizes: 30x30 -> 15x15 -> 8x8
   num_res_blocks: 2
-  attention_levels: [false, true, true]
   num_heads: 4
   norm_num_groups: 16
   context_dim: 256 # Cross-attention conditioning dimension
-  conditioning_mode: "hybrid" # "cross_attn", "concat", or "hybrid" (cross_attn + concat)
+  conditioning_mode: "hybrid" # Cross-attention plus spatial concatenation
 
 # Diffusion Process & Sampling
 diffusion:
@@ -32,7 +32,7 @@ diffusion:
   beta_start: 0.0001
   beta_end: 0.02
   prediction_type: "epsilon" # Predicts noise \epsilon
-  sampling_method: "ddim" # "ddim" or "ddpm"
+  sampling_method: "ddim" # Implemented sampling method
   ddim_sampling_steps: 25 # Fast inference: 25 steps per missing slice
   ddim_eta: 0.0 # Deterministic sampling (eta=0.0)
 
@@ -43,10 +43,8 @@ training:
   weight_decay: 1.0e-4
   min_lr: 1.0e-6
   epochs: 50
-  warmup_epochs: 3
   grad_clip_norm: 1.0
   mixed_precision: true # FP16 AMP
   ema_decay: 0.999
-  use_ema: true
   checkpoint_dir: "./experiments/checkpoints/diffusion"
   vae_checkpoint: "./experiments/checkpoints/vae/best_model.pt"

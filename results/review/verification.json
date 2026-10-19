@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "disclosure_sections": 29,
+  "drawings": 4,
+  "outer_table_rows": 67,
+  "outer_table_grid_columns": 10,
+  "tables_preserved": true,
+  "source_register_entries": 11,
+  "benchmark_rows": {
+    "test_reference": 100,
+    "validation_reference": 80,
+    "validation_candidate": 80,
+    "test_selected": 20
+  },
+  "original_checkpoint_hashes_unchanged": {
+    "checkpoint": true,
+    "vae_checkpoint": true
+  },
+  "experiment_elapsed_seconds": 2421.7810000000027,
+  "regression_tests": "34 passed; latest invocation recorded in execution output",
+  "training_smoke": "two iterations followed by explicit resume to cumulative iteration three",
+  "native_page_rendering": "unavailable: Microsoft Word COM server initialization failed (80080005); drawings inspected directly and XML/table dimensions verified",
+  "git_diff_check": "Review edits compile; pre-existing trailing whitespace remains in user-edited scripts/view_3d_blender.py and was preserved"
+}

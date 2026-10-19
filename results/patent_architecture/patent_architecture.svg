@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="2180" viewBox="0 0 1500 2180">
+<rect width="100%" height="100%" fill="white"/>
+<rect x="500" y="70" width="500" height="110" fill="white" stroke="black" stroke-width="3"/>
+<text x="750.0" y="91.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">100</text>
+<text x="750.0" y="125.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Sparse MRI slices</text>
+<text x="750.0" y="159.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">and acquired slice indices</text>
+<rect x="500" y="240" width="500" height="120" fill="white" stroke="black" stroke-width="3"/>
+<text x="750.0" y="266.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">110</text>
+<text x="750.0" y="300.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Intensity normalization</text>
+<text x="750.0" y="334.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">using acquired slices</text>
+<rect x="500" y="420" width="500" height="120" fill="white" stroke="black" stroke-width="3"/>
+<text x="750.0" y="446.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">120</text>
+<text x="750.0" y="480.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Bounding-slice selection</text>
+<text x="750.0" y="514.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">and target-depth calculation</text>
+<rect x="240" y="620" width="440" height="130" fill="white" stroke="black" stroke-width="3"/>
+<text x="460.0" y="651.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">130</text>
+<text x="460.0" y="685.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Shared residual</text>
+<text x="460.0" y="719.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">slice encoder</text>
+<rect x="820" y="620" width="440" height="130" fill="white" stroke="black" stroke-width="3"/>
+<text x="1040.0" y="651.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">140</text>
+<text x="1040.0" y="685.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Fourier depth, offset</text>
+<text x="1040.0" y="719.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">and gap embedding</text>
+<rect x="500" y="840" width="500" height="130" fill="white" stroke="black" stroke-width="3"/>
+<text x="750.0" y="871.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">150</text>
+<text x="750.0" y="905.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Conditioning formation</text>
+<text x="750.0" y="939.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Context tokens and spatial maps</text>
+<rect x="500" y="1070" width="500" height="130" fill="white" stroke="black" stroke-width="3"/>
+<text x="750.0" y="1101.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">160</text>
+<text x="750.0" y="1135.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Conditional latent U-Net</text>
+<text x="750.0" y="1169.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Noise prediction</text>
+<rect x="70" y="1070" width="330" height="130" fill="white" stroke="black" stroke-width="3"/>
+<text x="235.0" y="1101.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">170</text>
+<text x="235.0" y="1135.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Seeded Gaussian</text>
+<text x="235.0" y="1169.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">latent noise</text>
+<rect x="1100" y="1070" width="330" height="130" fill="white" stroke="black" stroke-width="3"/>
+<text x="1265.0" y="1101.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">180</text>
+<text x="1265.0" y="1135.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">DDIM sampler</text>
+<text x="1265.0" y="1169.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">and timestep schedule</text>
+<rect x="500" y="1330" width="500" height="110" fill="white" stroke="black" stroke-width="3"/>
+<text x="750.0" y="1351.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">190</text>
+<text x="750.0" y="1385.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">VAE decoder</text>
+<text x="750.0" y="1419.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Missing-slice synthesis</text>
+<rect x="500" y="1530" width="500" height="110" fill="white" stroke="black" stroke-width="3"/>
+<text x="750.0" y="1551.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">200</text>
+<text x="750.0" y="1585.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Volume assembly</text>
+<text x="750.0" y="1619.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Insert generated slices</text>
+<rect x="500" y="1720" width="500" height="110" fill="white" stroke="black" stroke-width="3"/>
+<text x="750.0" y="1758.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">210</text>
+<text x="750.0" y="1792.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Optional depth smoothing</text>
+<rect x="500" y="1910" width="500" height="110" fill="white" stroke="black" stroke-width="3"/>
+<text x="750.0" y="1931.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">220</text>
+<text x="750.0" y="1965.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Restore acquired slices</text>
+<text x="750.0" y="1999.0" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="25" fill="black">Dense MRI volume output</text>
+<polyline points="750,180 750,240" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="750,240 744.036847489076,227.33347671492052 755.963152510924,227.33347671492052" fill="black"/>
+<polyline points="750,360 750,420" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="750,420 744.036847489076,407.3334767149205 755.963152510924,407.3334767149205" fill="black"/>
+<polyline points="620,540 620,580 460,580 460,620" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="460,620 454.036847489076,607.3334767149205 465.963152510924,607.3334767149205" fill="black"/>
+<polyline points="880,540 880,580 1040,580 1040,620" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="1040,620 1034.036847489076,607.3334767149205 1045.963152510924,607.3334767149205" fill="black"/>
+<polyline points="460,750 460,800 620,800 620,840" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="620,840 614.036847489076,827.3334767149205 625.963152510924,827.3334767149205" fill="black"/>
+<polyline points="1040,750 1040,800 880,800 880,840" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="880,840 874.036847489076,827.3334767149205 885.963152510924,827.3334767149205" fill="black"/>
+<polyline points="750,970 750,1070" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="750,1070 744.036847489076,1057.3334767149206 755.963152510924,1057.3334767149206" fill="black"/>
+<text x="855" y="1015" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="23" fill="black">Conditioning</text>
+<polyline points="400,1135 500,1135" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="500,1135 487.3334767149205,1140.963152510924 487.3334767149205,1129.036847489076" fill="black"/>
+<polyline points="1000,1110 1100,1110" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="1100,1110 1087.3334767149206,1115.963152510924 1087.3334767149206,1104.036847489076" fill="black"/>
+<polyline points="1100,1160 1000,1160" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="1000,1160 1012.6665232850795,1154.036847489076 1012.6665232850795,1165.963152510924" fill="black"/>
+<text x="1050" y="1082" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="19" fill="black">Noise</text>
+<text x="1050" y="1190" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="19" fill="black">Latent, t</text>
+<polyline points="1265,1200 1265,1270 750,1270 750,1330" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="750,1330 744.036847489076,1317.3334767149206 755.963152510924,1317.3334767149206" fill="black"/>
+<text x="990" y="1240" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="23" fill="black">Final denoised latent</text>
+<polyline points="750,1440 750,1530" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="750,1530 744.036847489076,1517.3334767149206 755.963152510924,1517.3334767149206" fill="black"/>
+<polyline points="750,1640 750,1720" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="750,1720 744.036847489076,1707.3334767149206 755.963152510924,1707.3334767149206" fill="black"/>
+<polyline points="750,1830 750,1910" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="750,1910 744.036847489076,1897.3334767149206 755.963152510924,1897.3334767149206" fill="black"/>
+<polyline points="500,300 30,300 30,1965 500,1965" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="500,1965 487.3334767149205,1970.963152510924 487.3334767149205,1959.036847489076" fill="black"/>
+<text x="250" y="260" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="23" fill="black">Normalized acquired slices</text>
+<polyline points="30,1585 500,1585" fill="none" stroke="black" stroke-width="3"/>
+<polygon points="500,1585 487.3334767149205,1590.963152510924 487.3334767149205,1579.036847489076" fill="black"/>
+<text x="750" y="2090" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="30" fill="black">FIG. 1</text>
+<text x="750" y="2135" text-anchor="middle" dominant-baseline="central" font-family="Arial,Helvetica,sans-serif" font-size="24" fill="black">SPARSE-TO-DENSE MRI RECONSTRUCTION ARCHITECTURE</text>
+</svg>

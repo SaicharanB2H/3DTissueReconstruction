@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "exact_repeat_of_saved_selected_example": true,
+  "max_absolute_difference": 0.0,
+  "acquired_slices_preserved_exactly": true,
+  "volume_id": 14,
+  "stride": 8,
+  "seed": 1450,
+  "steps": 25,
+  "weights": "raw",
+  "seconds": 8.719000000004598,
+  "checkpoint": {
+    "path": "D:\\StudyMaterials\\Books and materials\\Semester-7\\Project 1\\experiments\\checkpoints\\diffusion\\best_model.pt",
+    "sha256": "9644972de899da7200f179a0f940899730c17a5f65edeeaddd8083aa779cac52",
+    "bytes": 276950875
+  }
+}

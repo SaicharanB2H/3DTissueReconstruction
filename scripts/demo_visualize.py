@@ -12,6 +12,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from src.data.dataset import BraTSVolumeDataset, get_patient_splits
 from src.data.sparsifier import VolumeSparsifier
+from src.data.preprocessing import normalize_acquired_volume
 from src.baselines.interpolators import get_baseline_interpolator
 from src.visualization.slice_viewer import SliceComparisonViewer
 from src.visualization.volume_viewer_3d import Volume3DVisualizer
@@ -36,16 +37,16 @@ def generate_visual_demos(
     # 1. Load dataset & Volume
     dataset = BraTSVolumeDataset(data_dir=data_dir, volume_ids=[volume_id], modality=modality)
     item = dataset[0]
-    gt_vol = item["volume"] # (D, C, H, W)
     total_slices = dataset.total_slices
 
     # 2. Sparsify
     sparsifier = VolumeSparsifier(stride=stride, total_slices=total_slices)
+    gt_vol, _ = normalize_acquired_volume(item["volume_raw"], sparsifier.get_acquired_indices())
     sparse_vol, mask, acquired, missing = sparsifier.sparsify_volume(gt_vol, stride=stride)
 
     # 3. Generate baseline reconstructions
     predictions_by_method = {}
-    for baseline in ["nearest", "linear", "cubic", "bspline_3d"]:
+    for baseline in ["nearest", "linear", "cubic", "smoothed_linear"]:
         interp = get_baseline_interpolator(baseline)
         recon = interp.reconstruct(sparse_vol, acquired, total_slices)
         predictions_by_method[baseline.capitalize()] = recon
@@ -83,6 +84,7 @@ def generate_visual_demos(
             gt_volume=gt_vol,
             volume_id=volume_id,
             stride=stride,
+            method_name="Linear interpolation",
         )
         logger.info(f"Generated 3D volume rendering: {render_3d_path}")
 

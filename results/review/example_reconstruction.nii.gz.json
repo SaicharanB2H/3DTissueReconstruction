@@ -1,0 +1,59 @@
+{
+  "normalization_stats": [
+    0.12187608331441879,
+    5.725654125213623
+  ],
+  "volume_id": 14,
+  "stride": 8,
+  "checkpoint": {
+    "path": "D:\\StudyMaterials\\Books and materials\\Semester-7\\Project 1\\experiments\\checkpoints\\diffusion\\best_model.pt",
+    "sha256": "9644972de899da7200f179a0f940899730c17a5f65edeeaddd8083aa779cac52",
+    "bytes": 276950875
+  },
+  "metrics": {
+    "psnr_full": 28.690260969151836,
+    "ssim_full": 0.9075457453727722,
+    "mae_full": 0.01886402815580368,
+    "mse_full": 0.005407965276390314,
+    "psnr_missing": 28.057991901131032,
+    "ssim_missing": 0.8930569887161255,
+    "mae_missing": 0.02182033099234104,
+    "mse_missing": 0.0062554823234677315
+  },
+  "input_axes": "D,C,H,W",
+  "intensity_space": "normalized [-1,1]",
+  "geometry": "unknown; identity affine uses voxel indices, not verified patient coordinates",
+  "output_axes": "H,W,D",
+  "seed": 1450,
+  "weights": "raw",
+  "steps": 25,
+  "smoothing": true,
+  "acquired_indices": [
+    0,
+    8,
+    16,
+    24,
+    32,
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    88,
+    96,
+    104,
+    112,
+    120,
+    128,
+    136,
+    144,
+    152,
+    154
+  ],
+  "vae_checkpoint": {
+    "path": "D:\\StudyMaterials\\Books and materials\\Semester-7\\Project 1\\experiments\\checkpoints\\vae\\best_model.pt",
+    "sha256": "0b937d72ccecd68460b1ac0660e7296d711f27c8a50a83f043eedfd8abb030ff",
+    "bytes": 63304257
+  }
+}

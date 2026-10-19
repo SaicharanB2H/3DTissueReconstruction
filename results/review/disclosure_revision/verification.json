@@ -1,0 +1,18 @@
+{
+  "input_sha256": "4fd9489ec595f8a76361dfb3fd75f8bb1e44ac7463240133eaed6c6581e08674",
+  "input_preserved": true,
+  "backup_sha256": "4fd9489ec595f8a76361dfb3fd75f8bb1e44ac7463240133eaed6c6581e08674",
+  "revised_path": "D:\\StudyMaterials\\Books and materials\\Semester-7\\Project 1\\Invention_Disclosure_Revised_v2.docx",
+  "revised_sha256": "bf185ce9af64f38fa5c526330c59f25b90f0ea3aa91862653416a2eee2790dc2",
+  "original_outer_rows": 67,
+  "revised_outer_rows": 67,
+  "sections_populated": 29,
+  "drawings": 4,
+  "title_words": 12,
+  "encoding_issues": [],
+  "bibliography_entries": 19,
+  "uncited_sources": [],
+  "native_layout_status": "Unavailable: Word sandbox access failed; elevated rendering stalled; no PDF produced; final pagination pending",
+  "unknown_facts": "See PENDING_CONFIRMATIONS.md; not inferred",
+  "saved_input_changes_detected": []
+}

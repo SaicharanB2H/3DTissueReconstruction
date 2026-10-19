@@ -1,0 +1,12 @@
+parameter,demonstrated,proposed_or_accepted_only,evidence
+Sampling strides,4/8/16 equal-probability fine-tuning; corrected quality at 8/16,"Other positive strides: proposed, no quality guarantee",training manifest; test CSVs
+Input dimensions,155 depths; 240x240; learned C=1 assumed FLAIR,Other sizes/modalities/organs need training + evaluation,dataset audit; model config
+DDIM steps / eta,25/50 compared; selected 25; eta=0,1..1000 accepted by API; effective range unestablished,validation CSVs; selection.json
+Normalization,"Foreground 0.5/99.5 percentiles; [-1,1]; epsilon=1e-7","Other percentiles/ranges: proposed, require experiments",normalization source + focused checks
+Depth smoothing,Off / Gaussian sigma=0.5 compared; selected on,Other sigma values: proposed; no tested quality range,validation configuration
+Weights,Raw / available EMA compared; candidate EMA decay=0.999,"Other decay values: proposed, unvalidated",checkpoint/configuration records
+Fine-tuning LR,2e-5; AdamW; weight decay=1e-4; clip norm=1,Other optimizer/LR ranges: unvalidated,finetune manifest and training.csv
+Batch / budget,Batch 8; 3000 steps; 24000 replacement draws; 18.49min,Other batch/step budgets accepted; quality not established,finetune completion.json
+Latent / conditioning,4x30x30; scale=0.18215; 17x256 tokens; 8 spatial channels,Changed latent/context widths require retraining,model source/configuration
+Model selection,Five validation IDs; PSNR mean across 8/16; SSIM must not decrease,Extra validation cohorts/criteria: proposed,validation_reference/candidate.csv
+Irregular indices / export,Focused checks; both boundaries required; 1/4-channel export,API correctness checks are not quality validation,tests; physical geometry unavailable

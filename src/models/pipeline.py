@@ -14,6 +14,7 @@ from src.models.vae import MedicalAutoencoderKL
 from src.models.unet_diffusion import ConditionalUNet2D
 from src.models.scheduler import DiffusionNoiseScheduler
 from src.data.sparsifier import VolumeSparsifier
+from src.data.preprocessing import validate_acquired
 
 
 class SparseToDenseDiffusionPipeline(nn.Module):
@@ -27,12 +28,16 @@ class SparseToDenseDiffusionPipeline(nn.Module):
         vae: MedicalAutoencoderKL,
         unet: ConditionalUNet2D,
         scheduler: DiffusionNoiseScheduler,
+        default_inference_steps: int = 25,
+        default_eta: float = 0.0,
     ):
         super().__init__()
         self.slice_encoder = slice_encoder
         self.vae = vae
         self.unet = unet
         self.scheduler = scheduler
+        self.default_inference_steps = default_inference_steps
+        self.default_eta = default_eta
 
     @torch.no_grad()
     def generate_slices_batch(
@@ -42,14 +47,25 @@ class SparseToDenseDiffusionPipeline(nn.Module):
         normalized_zs: torch.Tensor,
         alphas: torch.Tensor,
         gap_dists: torch.Tensor,
-        num_inference_steps: int = 25,
-        eta: float = 0.0,
+        num_inference_steps: Optional[int] = None,
+        eta: Optional[float] = None,
+        generator: Optional[torch.Generator] = None,
     ) -> torch.Tensor:
         """
         Synthesizes a batch of missing 2D slices given their bounding context.
         """
         B = prev_slices.shape[0]
         device = prev_slices.device
+        num_inference_steps = self.default_inference_steps if num_inference_steps is None else num_inference_steps
+        eta = self.default_eta if eta is None else eta
+        if prev_slices.shape != next_slices.shape or prev_slices.ndim != 4 or any(s % 8 for s in prev_slices.shape[-2:]):
+            raise ValueError("Context slices must share (B,C,H,W) shape with spatial dimensions divisible by 8")
+        if not np.isfinite(eta) or eta < 0 or not all(torch.isfinite(x).all() for x in (prev_slices, next_slices, normalized_zs, alphas, gap_dists)):
+            raise ValueError("Inputs must be finite and eta nonnegative")
+        if any(x.shape != (B,) for x in (normalized_zs, alphas, gap_dists)):
+            raise ValueError('Coordinates must have one scalar per batch item')
+        if torch.any((normalized_zs < 0) | (normalized_zs > 1)) or torch.any((alphas < 0) | (alphas > 1)) or torch.any(gap_dists <= 0):
+            raise ValueError('Depth and alpha must be in [0,1]; gaps must be positive')
 
         # 1. Extract context tokens and spatial conditioning from slice encoder
         context_tokens, spatial_context = self.slice_encoder(
@@ -57,8 +73,8 @@ class SparseToDenseDiffusionPipeline(nn.Module):
         )
 
         # 2. Initialize latent noise z_T ~ N(0, I) of shape (B, 4, 30, 30)
-        latent_shape = (B, self.unet.in_channels, 30, 30)
-        z_t = torch.randn(latent_shape, device=device)
+        latent_shape = (B, self.unet.in_channels, *spatial_context.shape[-2:])
+        z_t = torch.randn(latent_shape, device=device, generator=generator)
 
         # 3. Fast DDIM Reverse Diffusion Loop
         timesteps = self.scheduler.get_ddim_timesteps(num_inference_steps)
@@ -77,6 +93,7 @@ class SparseToDenseDiffusionPipeline(nn.Module):
                 prev_timestep=t_prev,
                 sample=z_t,
                 eta=eta,
+                generator=generator,
             )
 
         # 4. Decode denoised latents back to image space (B, C, 240, 240)
@@ -89,10 +106,12 @@ class SparseToDenseDiffusionPipeline(nn.Module):
         sparse_volume: Union[np.ndarray, torch.Tensor],
         acquired_indices: List[int],
         stride: int = 4,
-        total_slices: int = 155,
-        num_inference_steps: int = 25,
+        total_slices: Optional[int] = None,
+        num_inference_steps: Optional[int] = None,
         batch_size: int = 8,
         apply_smoothing: bool = True,
+        generator: Optional[torch.Generator] = None,
+        eta: Optional[float] = None,
     ) -> torch.Tensor:
         """
         Takes a sparse 3D volume, reconstructs all missing slices,
@@ -100,14 +119,24 @@ class SparseToDenseDiffusionPipeline(nn.Module):
         """
         is_tensor = isinstance(sparse_volume, torch.Tensor)
         device = next(self.parameters()).device
+        num_inference_steps = self.default_inference_steps if num_inference_steps is None else num_inference_steps
 
         if is_tensor:
             vol = sparse_volume.clone().to(device)
         else:
             vol = torch.from_numpy(np.copy(sparse_volume)).to(device)
 
+        if vol.ndim != 4 or vol.shape[1] != self.slice_encoder.in_channels or not torch.isfinite(vol).all():
+            raise ValueError("Expected finite depth-first (D,C,H,W) volume with matching channels")
+        total_slices = vol.shape[0] if total_slices is None else total_slices
+        if total_slices != vol.shape[0] or batch_size < 1:
+            raise ValueError("Depth must match input; batch_size must be positive")
+        acquired_indices = validate_acquired(acquired_indices, total_slices)
+        self.scheduler.get_ddim_timesteps(num_inference_steps)
+        if acquired_indices[0] != 0 or acquired_indices[-1] != total_slices - 1:
+            raise ValueError("Boundary slices are required; extrapolation is not supported")
         sparsifier = VolumeSparsifier(stride=stride, total_slices=total_slices)
-        missing_indices = sparsifier.get_missing_indices(total_slices=total_slices, stride=stride)
+        missing_indices = sorted(set(range(total_slices)) - set(acquired_indices))
 
         if len(missing_indices) == 0:
             return vol
@@ -138,6 +167,8 @@ class SparseToDenseDiffusionPipeline(nn.Module):
                 alphas=alphas,
                 gap_dists=gap_dists,
                 num_inference_steps=num_inference_steps,
+                generator=generator,
+                eta=eta,
             )
 
             # Assign generated slices into volume

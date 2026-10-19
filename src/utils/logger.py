@@ -42,7 +42,7 @@ class MetricTracker:
     """Tracks running averages and logs scalars to TensorBoard."""
 
     def __init__(self, log_dir: Optional[str] = None):
-        self.writer = SummaryWriter(log_dir) if log_dir else None
+        self.writer = SummaryWriter(log_dir) if log_dir and SummaryWriter is not None else None
         self.metrics: Dict[str, float] = {}
         self.counts: Dict[str, int] = {}
 

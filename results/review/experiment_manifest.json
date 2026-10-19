@@ -1,0 +1,29 @@
+{
+  "validation_volumes": [
+    2,
+    5,
+    9,
+    15,
+    28
+  ],
+  "test_volumes": [
+    14,
+    21,
+    22,
+    35,
+    49,
+    50,
+    51,
+    53,
+    55,
+    59
+  ],
+  "train_count": 258,
+  "seed": 42,
+  "total_budget_seconds": 7200,
+  "stage_budgets_seconds": [
+    1200,
+    4200,
+    1800
+  ]
+}

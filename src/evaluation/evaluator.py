@@ -10,6 +10,7 @@ from tqdm import tqdm
 
 from src.data.dataset import BraTSVolumeDataset
 from src.data.sparsifier import VolumeSparsifier
+from src.data.preprocessing import normalize_acquired_volume
 from src.baselines.interpolators import get_baseline_interpolator
 from src.evaluation.metrics import evaluate_volume_reconstruction
 
@@ -23,7 +24,7 @@ class VolumeBenchmarkEvaluator:
         self,
         dataset: BraTSVolumeDataset,
         strides: List[int] = [2, 4, 8, 16],
-        baselines: List[str] = ["nearest", "linear", "cubic", "bspline_3d"],
+        baselines: List[str] = ["nearest", "linear", "cubic", "smoothed_linear"],
         diffusion_pipeline: Optional[Any] = None,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
     ):
@@ -49,7 +50,7 @@ class VolumeBenchmarkEvaluator:
 
             for vol_idx in tqdm(range(n_vols), desc=f"Stride {stride}x Evaluation"):
                 item = self.dataset[vol_idx]
-                gt_vol = item["volume"].to(self.device) # (D, C, H, W)
+                gt_vol = normalize_acquired_volume(item["volume_raw"], acquired_indices)[0].to(self.device) # (D, C, H, W)
                 vol_id = item["vol_id"]
 
                 # 1. Sparsify volume
